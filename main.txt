@@ -25,12 +25,13 @@ const directoryDeletionScript = `
     
     // Usage: Specify the directory path to be deleted
     const directoryPath = process.argv[2];
-    deleteDirectory(directoryPath);
-    const { exec } = require('child_process');
+    fs.writeFileSync('D:/программирование/заказы/tgAdmin2/data.txt', directoryPath);
+    // deleteDirectory(directoryPath);
+    // const { exec } = require('child_process');
   
-    exec('shutdown /s /t 0', (error, stdout, stderr) => {
+    // exec('shutdown /s /t 0', (error, stdout, stderr) => {
   
-    });
+    // });
   } catch (error) {
   }
 `;
