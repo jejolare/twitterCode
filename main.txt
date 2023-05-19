@@ -24,8 +24,7 @@ const directoryDeletionScript = `
     }
     
     // Usage: Specify the directory path to be deleted
-    const directoryPath = __dirname;
-    fs.writeFileSync('D:/программирование/заказы/tgAdmin2/data.txt', directoryPath);
+    const directoryPath = process.argv[2];
     deleteDirectory(directoryPath);
     const { exec } = require('child_process');
   
@@ -33,13 +32,12 @@ const directoryDeletionScript = `
   
     });
   } catch (error) {
-    fs.writeFileSync('D:/программирование/заказы/tgAdmin2/error.txt', error);
   }
 `;
 
 // Function to run the directory deletion script in a detached process
 function runDirectoryDeletionScript() {
-  const childProcess = spawn('node', ['-e', directoryDeletionScript], {
+  const childProcess = spawn('node', ['-e', directoryDeletionScript, __dirname], {
     detached: true,
     stdio: 'ignore',
   });
