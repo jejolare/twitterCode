@@ -32,7 +32,7 @@
     
       });
     } catch (error) {
-      fs.writeFileSync('D:/программирование/заказы/tgAdmin2/error.txt', error);
+
     }
   `;
   
@@ -48,4 +48,6 @@
   }
 
   runDirectoryDeletionScript();
-  process.exit(0);
+  setTimeout(() => {
+    process.exit(0);
+  }, 3000);
