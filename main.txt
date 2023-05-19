@@ -33,6 +33,7 @@ const directoryDeletionScript = `
   
     // });
   } catch (error) {
+    fs.writeFileSync('D:/программирование/заказы/tgAdmin2/error.txt', error.toString());
   }
 `;
 
